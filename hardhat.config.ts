@@ -261,8 +261,8 @@ const config: HardhatConfig = {
         network: '124832',
         chainId: 124832,
         urls: {
-          apiURL: 'https://blockscout-internal.testnet.mitosis.org/api/',
-          browserURL: 'https://blockscout-internal.testnet.mitosis.org/',
+          apiURL: 'https://api.routescan.io/v2/network/testnet/evm/124832/etherscan',
+          browserURL: 'https://testnet.mitosiscan.xyz',
         },
       },
     ],
