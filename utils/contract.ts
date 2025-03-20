@@ -3,6 +3,7 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types'
 
 import { getHRE, liveLog } from './misc'
 import { getImplementationAddress } from '@openzeppelin/upgrades-core'
+import { DeployOptions } from 'hardhat-deploy/types'
 
 export const getDeployedAddress = async (name: string): Promise<Address> => {
   const hre = getHRE()
@@ -34,24 +35,15 @@ export const deployWithVerify = async (
   hre: HardhatRuntimeEnvironment,
   name: string,
   args: any[],
-  options?: {
-    libraries?: any
-    proxy?: boolean
-    contract?: string
-  },
+  options: Partial<DeployOptions> = {},
 ) => {
-  if (!options) {
-    options = {}
-  }
   const { deployer } = await hre.getNamedAccounts()
   const deployedAddress = (
     await hre.deployments.deploy(name, {
       from: deployer,
       args: args,
       log: true,
-      libraries: options.libraries,
-      proxy: options.proxy,
-      contract: options.contract,
+      ...options,
     })
   ).address
 
